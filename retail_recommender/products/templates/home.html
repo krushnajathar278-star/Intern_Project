@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Search</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header>
+        <h1>Product Search</h1>
+    </header>
+    <form method="GET" action="{% url 'search_products' %}" class="search-form">
+        <input 
+            type="text" 
+            name="q" 
+            placeholder="Search for products (e.g., 'Laptop', 'Table')..." 
+            value="{{ query|default:'' }}"
+            class="search-input"
+        >
+        <button type="submit" class="search-button">Search</button>
+    </form>
+    
+
+ 
+
+    <footer>
+        &copy; 2024 Chetan Retail Recommender | Your go-to product search system
+    </footer>
+</body>
+</html>

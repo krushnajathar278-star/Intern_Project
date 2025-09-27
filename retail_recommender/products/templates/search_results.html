@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Inventory</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style1.css' %}">
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <h1>Product Inventory</h1>
+            <p>Manage and Track Your Products Easily</p>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="search-bar">
+            <form method="GET" action="{% url 'search_products' %}" class="search-form">
+                <input 
+                    type="text" 
+                    name="q" 
+                    placeholder="Search for products (e.g., 'Laptop', 'Table')..." 
+                    value="{{ query|default:'' }}"
+                    id="search"
+                >
+                <button type="submit" class="search-button">Search</button>
+            </form>
+        </div>
+
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Product Description</th>
+                        <th>Unit Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% if results %}
+                        {% for product in results %}
+                            <tr>
+                                <td>{{ product.stock_code }}</td>
+                                <td>{{ product.description }}</td>
+                                <td>${{ product.unit_price }}</td>
+                            </tr>
+                        {% endfor %}
+                    {% else %}
+                        <tr>
+                            <td colspan="4" class="no-results">No products found matching your search.</td>
+                        </tr>
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Chetan Inventory Management System</p>
+    </footer>
+</body>
+</html>
